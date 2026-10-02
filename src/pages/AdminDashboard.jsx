@@ -172,7 +172,32 @@ function AdminDashboard() {
 
                     <td>{candidate.institution}</td>
 
-                    <td>{candidate.certificateType}</td>
+                    <td>
+                      <strong>{candidate.certificateType}</strong>
+
+                      {/* Show presentation title for Research Paper / Poster */}
+                      {(candidate.certificateType === "Research Paper" ||
+                        candidate.certificateType === "Poster") &&
+                        candidate.presentationTitle && (
+                          <small
+                            style={{
+                              display: "block",
+                              marginTop: "6px",
+                              lineHeight: "1.4",
+                              maxWidth: "280px",
+                              whiteSpace: "normal",
+                              wordBreak: "break-word",
+                            }}
+                          >
+                            <strong>
+                              {candidate.certificateType === "Research Paper"
+                                ? "Paper: "
+                                : "Poster: "}
+                            </strong>
+                            {candidate.presentationTitle}
+                          </small>
+                        )}
+                    </td>
 
                     <td>
                       <span className={styles.status}>
