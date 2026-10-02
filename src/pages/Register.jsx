@@ -11,7 +11,8 @@ const initialForm = {
   institution: "",
   designation: "",
   participationType: "Online",
-  certificateType: "Participation",
+  certificateType: "Delegate",
+  presentationTitle: "",
   eventName: "1st International Conference - IANETL 2026",
 };
 
@@ -25,14 +26,39 @@ function Register() {
   const [countdown, setCountdown] = useState(5);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
     setForm((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
+
+      // Clear title when certificate type doesn't require it
+      ...(name === "certificateType" &&
+      value !== "Research Paper" &&
+      value !== "Poster"
+        ? { presentationTitle: "" }
+        : {}),
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Extra safety validation for Research Paper / Poster
+    if (
+      (form.certificateType === "Research Paper" ||
+        form.certificateType === "Poster") &&
+      !form.presentationTitle.trim()
+    ) {
+      setError(
+        `Please enter the ${
+          form.certificateType === "Research Paper"
+            ? "Research Paper"
+            : "Poster"
+        } Title.`
+      );
+      return;
+    }
 
     setLoading(true);
     setError("");
@@ -80,6 +106,20 @@ function Register() {
   const handleCloseError = () => {
     setError("");
   };
+
+  const showPresentationTitle =
+    form.certificateType === "Research Paper" ||
+    form.certificateType === "Poster";
+
+  const presentationLabel =
+    form.certificateType === "Research Paper"
+      ? "Research Paper Title"
+      : "Poster Title";
+
+  const presentationPlaceholder =
+    form.certificateType === "Research Paper"
+      ? "Enter your research paper title"
+      : "Enter your poster title";
 
   return (
     <PageShell>
@@ -199,15 +239,26 @@ function Register() {
                 value={form.certificateType}
                 onChange={handleChange}
                 options={[
-                  "Participation",
-                  "Presenter",
-                  "Speaker",
-                  "Delegate",
-                  "Volunteer",
                   "Organizer",
-                  "Winner",
+                  "Resource Person",
+                  "Delegate",
+                  "Research Paper",
+                  "Poster",
                 ]}
               />
+
+              {/* DYNAMIC TITLE FIELD */}
+              {showPresentationTitle && (
+                <Field
+                  label={presentationLabel}
+                  name="presentationTitle"
+                  value={form.presentationTitle}
+                  onChange={handleChange}
+                  placeholder={presentationPlaceholder}
+                  required
+                  full
+                />
+              )}
             </div>
           </section>
 
