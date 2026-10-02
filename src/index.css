@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --primary: #c90000;
+  --primary-dark: #a80000;
+  --primary-light: #e31b1b;
+
+  --secondary: #102c4c;
+  --secondary-dark: #0b2038;
+  --secondary-light: #1d4f7a;
+
+  --text-primary: #171717;
+  --text-secondary: #626262;
+  --text-muted: #777777;
+  --text-white: #ffffff;
+
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-light: #f5f6f8;
+
+  --border: #e7e7e7;
+  --border-light: #eeeeee;
+
+  --success: #198754;
+  --warning: #f59e0b;
+  --danger: #dc2626;
+  --info: #2563eb;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.12);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+
+  --container: 1200px;
+
+  --font-primary: "Inter", Arial, Helvetica, sans-serif;
+
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+

@@ -1,0 +1,103 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 30px 20px;
+  background: var(--bg-light);
+}
+
+.panel {
+  width: min(430px, 100%);
+  padding: 38px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: white;
+  box-shadow: var(--shadow-lg);
+}
+.logo {
+  width: 100px;
+  height:100px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.brand {
+  margin-bottom: 28px;
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+.label {
+  color: var(--primary);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.panel h1 {
+  margin: 8px 0;
+  font-size: 35px;
+  letter-spacing: -1.5px;
+}
+
+.panel > p {
+  margin: 0 0 25px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.panel form {
+  display: grid;
+  gap: 17px;
+}
+
+.panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.panel input {
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  outline: none;
+}
+
+.panel input:focus {
+  border-color: var(--primary);
+}
+
+.panel button {
+  min-height: 48px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: white;
+  font-weight: 800;
+}
+
+.panel button:disabled {
+  opacity: 0.6;
+}
+
+.error {
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 1px solid #f0baba;
+  border-radius: var(--radius-md);
+  background: #fff4f4;
+  color: var(--danger);
+  font-size: 12px;
+}
+
+@media (max-width: 450px) {
+  .panel {
+    padding: 27px 21px;
+  }
+}

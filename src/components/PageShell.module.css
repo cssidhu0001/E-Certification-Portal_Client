@@ -1,0 +1,42 @@
+.shell {
+  min-height: 100vh;
+}
+
+.main {
+  min-height: calc(100vh - 150px);
+}
+
+.footer {
+  width: 100%;
+  padding: 28px max(20px, calc((100% - var(--container)) / 2));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-primary);
+  font-size: 12px;
+}
+
+.footer div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.footer span {
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (max-width: 650px) {
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
