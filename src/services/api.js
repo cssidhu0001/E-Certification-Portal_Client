@@ -1,7 +1,10 @@
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
+const BACKEND_URL = API_BASE_URL.replace(/\/api$/, "");
 
 async function request(url, options = {}) {
   const response = await fetch(url, options);
+
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
@@ -14,7 +17,9 @@ async function request(url, options = {}) {
 export const registerCandidate = (payload) =>
   request(`${API_BASE_URL}/candidates`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(payload),
   });
 
@@ -28,8 +33,7 @@ export const verifyCertificate = (certificateId) =>
     `${API_BASE_URL}/verify/${encodeURIComponent(certificateId)}`
   );
 
-
-  export const verifyCertificateManually = (email, certificateId) =>
+export const verifyCertificateManually = (email, certificateId) =>
   request(
     `${API_BASE_URL}/verify?email=${encodeURIComponent(
       email
@@ -39,7 +43,9 @@ export const verifyCertificate = (certificateId) =>
 export const adminLogin = (payload) =>
   request(`${API_BASE_URL}/admin/login`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(payload),
   });
 
@@ -60,13 +66,10 @@ export const updateCandidateStatus = (id, status, token) =>
     body: JSON.stringify({ status }),
   });
 
-
-
-
-  export const downloadCertificate = async (certificateUrl) => {
+export const downloadCertificate = async (certificateUrl) => {
   const downloadUrl = certificateUrl.startsWith("http")
     ? certificateUrl
-    : `http://localhost:5000${certificateUrl}`;
+    : `${BACKEND_URL}${certificateUrl}`;
 
   const response = await fetch(downloadUrl);
 
@@ -79,8 +82,11 @@ export const updateCandidateStatus = (id, status, token) =>
   const blobUrl = window.URL.createObjectURL(blob);
 
   const link = document.createElement("a");
+
   link.href = blobUrl;
-  link.download = certificateUrl.split("/").pop() || "certificate.pdf";
+
+  link.download =
+    certificateUrl.split("/").pop() || "certificate.pdf";
 
   document.body.appendChild(link);
   link.click();
