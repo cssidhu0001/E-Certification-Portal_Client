@@ -76,7 +76,6 @@ function Home() {
           <strong>Check Status →</strong>
         </Link>
 
-        {/* MANUAL CERTIFICATE VERIFICATION */}
         <Link to="/verify" className={styles.card}>
           <span>03</span>
           <h2>Verify Certificate</h2>
@@ -87,6 +86,50 @@ function Home() {
           <strong>Verify →</strong>
         </Link>
       </section>
+
+      {/* QUERY / SUPPORT SECTION */}
+      <section className={styles.support}>
+        <div className={styles.supportContent}>
+          <span className={styles.supportLabel}>NEED ASSISTANCE?</span>
+
+          <h2>
+            Have a query regarding your
+            <span>certificate or registration?</span>
+          </h2>
+
+          <p>
+            For any queries related to certificates, registration, verification
+            or other conference-related matters, kindly reach out to us.
+          </p>
+
+          <a
+            href="mailto:nursingconference@mietkumaon.ac.in"
+            className={styles.email}
+          >
+            nursingconference@mietkumaon.ac.in
+          </a>
+
+          <Link to="/contact" className={styles.contactButton}>
+            Contact Us →
+          </Link>
+        </div>
+      </section>
+
+      {/* FOOTER CREDIT */}
+      <footer className={styles.footer}>
+        <span>© 2026 IANETL Conference. All rights reserved.</span>
+
+        <span className={styles.credit}>
+          Designed &amp; Maintained by{" "}
+          <a
+            href="https://charanjeetsinghsidhu.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Techvirsa
+          </a>
+        </span>
+      </footer>
     </PageShell>
   );
 }
