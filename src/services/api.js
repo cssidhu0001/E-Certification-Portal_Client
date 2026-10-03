@@ -66,31 +66,38 @@ export const updateCandidateStatus = (id, status, token) =>
     body: JSON.stringify({ status }),
   });
 
-export const downloadCertificate = async (certificateUrl) => {
+
+
+
+
+
+
+export const downloadCertificate = (certificateUrl) => {
+  if (!certificateUrl) {
+    throw new Error("Certificate URL not found");
+  }
+
   const downloadUrl = certificateUrl.startsWith("http")
     ? certificateUrl
     : `${BACKEND_URL}${certificateUrl}`;
 
-  const response = await fetch(downloadUrl);
+  let finalUrl = downloadUrl;
 
-  if (!response.ok) {
-    throw new Error("Unable to download certificate");
+  // Cloudinary PDF ko direct download mode mein open karo
+  if (finalUrl.includes("res.cloudinary.com")) {
+    finalUrl = finalUrl.replace(
+      "/raw/upload/",
+      "/raw/upload/fl_attachment/"
+    );
   }
-
-  const blob = await response.blob();
-
-  const blobUrl = window.URL.createObjectURL(blob);
 
   const link = document.createElement("a");
 
-  link.href = blobUrl;
-
-  link.download =
-    certificateUrl.split("/").pop() || "certificate.pdf";
+  link.href = finalUrl;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
 
   document.body.appendChild(link);
   link.click();
   link.remove();
-
-  window.URL.revokeObjectURL(blobUrl);
 };
