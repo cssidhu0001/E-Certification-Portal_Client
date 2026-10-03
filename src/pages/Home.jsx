@@ -49,7 +49,7 @@ function Home() {
 
         <div className={styles.poster}>
           <img
-            src="/conference-poster.png"
+            src="/Nursing-flyer"
             alt="IANETL 2026 conference poster"
           />
         </div>
