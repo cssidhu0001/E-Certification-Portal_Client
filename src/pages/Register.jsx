@@ -4,6 +4,8 @@ import PageShell from "../components/PageShell";
 import { registerCandidate } from "../services/api";
 import styles from "./Register.module.css";
 
+const MAX_TITLE_LENGTH = 145;
+
 const initialForm = {
   name: "",
   email: "",
@@ -28,28 +30,44 @@ function Register() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
+    setForm((prev) => {
+      let updatedValue = value;
 
-      // Clear title when certificate type doesn't require it
-      ...(name === "certificateType" &&
-      value !== "Research Paper" &&
-      value !== "Poster"
-        ? { presentationTitle: "" }
-        : {}),
-    }));
+      // Hard limit for presentation title
+      if (name === "presentationTitle") {
+        updatedValue = value.slice(0, MAX_TITLE_LENGTH);
+      }
+
+      return {
+        ...prev,
+        [name]: updatedValue,
+
+        // Clear title when certificate type doesn't require it
+        ...(name === "certificateType" &&
+        value !== "Research Paper" &&
+        value !== "Poster"
+          ? { presentationTitle: "" }
+          : {}),
+      };
+    });
+
+    // Clear previous error while user is correcting the form
+    if (error) {
+      setError("");
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Extra safety validation for Research Paper / Poster
-    if (
-      (form.certificateType === "Research Paper" ||
-        form.certificateType === "Poster") &&
-      !form.presentationTitle.trim()
-    ) {
+    const requiresTitle =
+      form.certificateType === "Research Paper" ||
+      form.certificateType === "Poster";
+
+    const trimmedTitle = form.presentationTitle.trim();
+
+    // Required title validation
+    if (requiresTitle && !trimmedTitle) {
       setError(
         `Please enter the ${
           form.certificateType === "Research Paper"
@@ -60,12 +78,26 @@ function Register() {
       return;
     }
 
+    // Maximum title length validation
+    if (requiresTitle && trimmedTitle.length > MAX_TITLE_LENGTH) {
+      setError(
+        `The ${form.certificateType === "Research Paper" ? "Research Paper" : "Poster"} Title must not exceed ${MAX_TITLE_LENGTH} characters, including spaces.`
+      );
+      return;
+    }
+
     setLoading(true);
     setError("");
     setResult(null);
 
     try {
-      const data = await registerCandidate(form);
+      // Send trimmed title to backend
+      const submissionData = {
+        ...form,
+        presentationTitle: requiresTitle ? trimmedTitle : "",
+      };
+
+      const data = await registerCandidate(submissionData);
 
       setResult(data);
       setForm(initialForm);
@@ -120,6 +152,8 @@ function Register() {
     form.certificateType === "Research Paper"
       ? "Enter your research paper title"
       : "Enter your poster title";
+
+  const titleCharacterCount = form.presentationTitle.length;
 
   return (
     <PageShell>
@@ -249,15 +283,28 @@ function Register() {
 
               {/* DYNAMIC TITLE FIELD */}
               {showPresentationTitle && (
-                <Field
-                  label={presentationLabel}
-                  name="presentationTitle"
-                  value={form.presentationTitle}
-                  onChange={handleChange}
-                  placeholder={presentationPlaceholder}
-                  required
-                  full
-                />
+                <div className={styles.full}>
+                  <Field
+                    label={presentationLabel}
+                    name="presentationTitle"
+                    value={form.presentationTitle}
+                    onChange={handleChange}
+                    placeholder={presentationPlaceholder}
+                    required
+                    maxLength={MAX_TITLE_LENGTH}
+                  />
+
+                  <div
+                    className={
+                      titleCharacterCount >= MAX_TITLE_LENGTH
+                        ? styles.characterCountLimit
+                        : styles.characterCount
+                    }
+                  >
+                    {titleCharacterCount}/{MAX_TITLE_LENGTH} characters
+                    <span> (including spaces)</span>
+                  </div>
+                </div>
               )}
             </div>
           </section>
