@@ -1,0 +1,410 @@
+.page {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 70px 0 90px;
+  color: #102c4c;
+}
+
+/* ==========================================
+   HERO
+========================================== */
+
+.hero {
+  max-width: 760px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #b5121b;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(42px, 6vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #102c4c;
+}
+
+.hero p {
+  max-width: 680px;
+  margin: 22px auto 0;
+  color: #687386;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   CONTACT GRID
+========================================== */
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+  padding: 30px;
+  border: 1px solid #e6e9ee;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 35px rgba(16, 44, 76, 0.06);
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #b5121b;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 22px;
+  border-radius: 12px;
+  background: #fff1f1;
+  color: #b5121b;
+  font-size: 20px;
+}
+
+.cardLabel {
+  display: block;
+  margin-bottom: 9px;
+  color: #7b8492;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.card h2 {
+  margin: 0;
+  color: #102c4c;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.card p {
+  margin: 14px 0 20px;
+  color: #687386;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.contactPerson {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #102c4c;
+  font-size: 15px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.contactPerson span {
+  color: #b5121b;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.contactPerson:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================
+   TECHNICAL SUPPORT
+========================================== */
+
+.supportSection {
+  margin-top: 24px;
+  border-radius: 22px;
+  background: #102c4c;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.supportContent {
+  padding: 42px;
+}
+
+.supportSection .eyebrow {
+  color: #f1b2b5;
+}
+
+.supportSection h2 {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: -0.02em;
+}
+
+.supportSection p {
+  max-width: 720px;
+  margin: 15px 0 30px;
+  color: #d5dce5;
+  line-height: 1.7;
+}
+
+.supportPerson {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.supportPerson > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.supportPerson > div:first-child span {
+  color: #bfc9d5;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.supportPerson strong {
+  font-size: 17px;
+}
+
+.supportActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.supportActions a {
+  padding: 11px 15px;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #102c4c;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.supportActions a:hover {
+  background: #f5f5f5;
+}
+
+/* ==========================================
+   EMAIL SECTION
+========================================== */
+
+.emailSection {
+  margin-top: 24px;
+  padding: 45px 30px;
+  border: 1px solid #e7e9ed;
+  border-radius: 22px;
+  background: #fafbfc;
+  text-align: center;
+}
+
+.emailSection h2 {
+  margin: 0;
+  color: #102c4c;
+  font-size: 30px;
+}
+
+.emailSection p {
+  max-width: 600px;
+  margin: 13px auto 24px;
+  color: #687386;
+  line-height: 1.7;
+}
+
+.emailButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 21px;
+  border-radius: 10px;
+  background: #b5121b;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 8px 22px rgba(181, 18, 27, 0.18);
+}
+
+.emailButton:hover {
+  transform: translateY(-1px);
+}
+
+/* ==========================================
+   ABOUT MIET
+========================================== */
+
+.about {
+  margin-top: 65px;
+  padding-top: 55px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.aboutHeader {
+  max-width: 700px;
+  margin-bottom: 30px;
+}
+
+.aboutHeader h2 {
+  margin: 0;
+  color: #102c4c;
+  font-size: clamp(32px, 4vw, 44px);
+  letter-spacing: -0.03em;
+}
+
+.aboutText {
+  max-width: 980px;
+}
+
+.aboutText p {
+  margin: 0 0 18px;
+  color: #5f6b7b;
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+/* ==========================================
+   SOCIAL
+========================================== */
+
+.socialSection {
+  margin-top: 65px;
+  padding: 45px 0 0;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.socialSection h2 {
+  margin: 0 0 28px;
+  color: #102c4c;
+  font-size: 30px;
+}
+
+.socialGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.socialGrid div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 20px 14px;
+  border: 1px solid #e7e9ed;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.socialGrid strong {
+  color: #102c4c;
+  font-size: 14px;
+}
+
+.socialGrid span {
+  color: #7a8492;
+  font-size: 12px;
+  word-break: break-word;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 800px) {
+  .page {
+    padding: 50px 0 70px;
+  }
+
+  .contactGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .supportPerson {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .supportActions {
+    justify-content: flex-start;
+  }
+
+  .socialGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .page {
+    width: min(100% - 22px, 1120px);
+  }
+
+  .hero {
+    margin-bottom: 40px;
+  }
+
+  .hero h1 {
+    font-size: 43px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  .supportContent {
+    padding: 28px 22px;
+  }
+
+  .supportSection h2 {
+    font-size: 28px;
+  }
+
+  .supportActions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .supportActions a {
+    text-align: center;
+  }
+
+  .emailSection {
+    padding: 35px 20px;
+  }
+
+  .emailButton {
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  .socialGrid {
+    grid-template-columns: 1fr;
+  }
+}

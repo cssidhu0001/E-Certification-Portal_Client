@@ -67,11 +67,6 @@ export const updateCandidateStatus = (id, status, token) =>
   });
 
 
-
-
-
-
-
 export const downloadCertificate = (certificateUrl) => {
   if (!certificateUrl) {
     throw new Error("Certificate URL not found");

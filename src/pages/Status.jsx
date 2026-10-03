@@ -179,7 +179,7 @@ function Status() {
                 <span>Event</span>
 
                 <strong>
-                  {candidate.eventName}
+                  {candidate.eventName ||"1st International Conference - IANETL 2026"}
                 </strong>
               </div>
             </div>

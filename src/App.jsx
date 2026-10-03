@@ -6,6 +6,7 @@ import Status from "./pages/Status";
 import Verify from "./pages/Verify";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
 
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
-
+<Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
