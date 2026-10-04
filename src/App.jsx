@@ -7,6 +7,7 @@ import Verify from "./pages/Verify";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import Contact from "./pages/Contact";
+import ExportCenter from "./pages/admin/ExportCenter";
 
 function App() {
   return (
@@ -28,7 +29,12 @@ function App() {
 
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
 <Route path="/contact" element={<Contact />} />
+<Route
+  path="/admin/export"
+  element={<ExportCenter />}
+/>
         <Route path="*" element={<Navigate to="/" replace />} />
+
       </Routes>
     </BrowserRouter>
   );

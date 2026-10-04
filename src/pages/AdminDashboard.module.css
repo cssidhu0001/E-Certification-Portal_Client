@@ -562,3 +562,34 @@ td small {
     padding: 15px;
   }
 }
+
+
+
+.exportLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 17px;
+  border-radius: 8px;
+  background: #111827;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.exportLink:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 650px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .exportLink {
+    width: 100%;
+  }
+}

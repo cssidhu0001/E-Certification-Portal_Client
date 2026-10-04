@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { getCandidates, updateCandidateStatus } from "../services/api";
 import styles from "./AdminDashboard.module.css";
 
@@ -121,7 +121,16 @@ function AdminDashboard() {
           <p>Welcome, {admin?.name || "Administrator"}</p>
         </div>
 
+
+    <Link
+  to="/admin/export"
+  className={styles.exportLink}
+>
+  Export Center →
+</Link>
+
         <button onClick={logout}>Logout</button>
+    
       </header>
 
       {error && <div className={styles.error}>{error}</div>}
