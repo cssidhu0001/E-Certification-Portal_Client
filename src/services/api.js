@@ -96,3 +96,57 @@ export const downloadCertificate = (certificateUrl) => {
   link.click();
   link.remove();
 };
+
+
+export const getReportConfig = async (token) => {
+  return request(`${API_BASE_URL}/reports/config`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const previewReport = async (payload, token) => {
+  return request(`${API_BASE_URL}/reports/preview`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(payload),
+  });
+};
+
+export const exportReport = async (payload, token) => {
+  const response = await fetch(`${API_BASE_URL}/reports/export`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+
+    throw new Error(
+      data.message || "Unable to generate Excel report."
+    );
+  }
+
+  const blob = await response.blob();
+
+  const password =
+    response.headers.get("X-Export-Password") || "";
+
+  const filename =
+    response.headers.get("X-Export-Filename") ||
+    "IANETL-2026-Export.xlsx";
+
+  return {
+    blob,
+    password,
+    filename,
+  };
+};
