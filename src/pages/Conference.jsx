@@ -3,6 +3,7 @@ import PageShell from "../components/PageShell";
 import styles from "./Conference.module.css";
 
 function Conference() {
+   
   return (
     <PageShell>
       <main className={styles.page}>
@@ -41,7 +42,7 @@ function Conference() {
 
             <div className={styles.heroActions}>
               <a
-                href="YOUR_GOOGLE_MEET_LINK"
+                  href="https://meet.google.com/zby-gcxz-uez"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.primaryButton}
@@ -87,7 +88,7 @@ function Conference() {
               </div>
 
               <a
-                href="YOUR_GOOGLE_MEET_LINK"
+               href="https://meet.google.com/zby-gcxz-uez"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.meetButton}
