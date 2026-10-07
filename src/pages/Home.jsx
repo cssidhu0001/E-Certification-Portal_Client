@@ -1,8 +1,12 @@
+import { useState } from "react";
+import ConferencePopup from "../components/ConferencePopup";
 import { Link } from "react-router-dom";
 import PageShell from "../components/PageShell";
 import styles from "./Home.module.css";
 
+
 function Home() {
+  const [conferenceOpen, setConferenceOpen] = useState(true);
   return (
     <PageShell>
       <section className={styles.hero}>
@@ -55,6 +59,90 @@ function Home() {
         </div>
       </section>
 
+
+
+<div className={styles.virtualConferenceSection}>
+  <button
+    type="button"
+    className={styles.virtualConferenceCard}
+    onClick={() => setConferenceOpen(true)}
+  >
+    <div className={styles.virtualConferenceContent}>
+
+      <div className={styles.virtualConferenceLabel}>
+        <span className={styles.liveIndicator}></span>
+        VIRTUAL CONFERENCE
+      </div>
+
+      <h2>
+        Join the IANETL 2026 Virtual Conference
+      </h2>
+
+      <p>
+        Access live presentations, conference sessions,
+        Google Meet, YouTube & Facebook Live and
+        important conference resources.
+      </p>
+    </div>
+
+    <div className={styles.virtualConferenceArrow}>
+      →
+    </div>
+  </button>
+</div>
+
+
+
+
+
+<section className={styles.liveSessionSection}>
+  <div className={styles.liveSessionCard}>
+
+    <div className={styles.liveSessionContent}>
+
+      <div className={styles.liveSessionLabel}>
+        <span className={styles.liveDot}></span>
+        LIVE SESSION
+      </div>
+
+      <h2>Watch IANETL 2026 Live</h2>
+
+      <p>
+        Follow the conference live online through YouTube
+        and Facebook.
+      </p>
+
+      <div className={styles.liveActions}>
+        <a
+          href="YOUR_YOUTUBE_LIVE_LINK"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.youtubeButton}
+        >
+          ▶&nbsp; Watch on YouTube
+        </a>
+
+        <a
+          href="YOUR_FACEBOOK_LIVE_LINK"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.facebookButton}
+        >
+          f&nbsp;&nbsp; Watch on Facebook
+        </a>
+      </div>
+
+    </div>
+
+    <div className={styles.liveSessionSide}>
+      <span>LIVE</span>
+      <strong>ONLINE</strong>
+    </div>
+
+  </div>
+</section>
+
+
       <section className={styles.cards}>
         <Link to="/register" className={styles.card}>
           <span>01</span>
@@ -86,6 +174,8 @@ function Home() {
           <strong>Verify →</strong>
         </Link>
       </section>
+
+   
 
       {/* QUERY / SUPPORT SECTION */}
       <section className={styles.support}>
@@ -130,7 +220,12 @@ function Home() {
           </a>
         </span>
       </footer>
+      <ConferencePopup
+  isOpen={conferenceOpen}
+  onClose={() => setConferenceOpen(false)}
+/>
     </PageShell>
+    
   );
 }
 

@@ -8,7 +8,8 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import Contact from "./pages/Contact";
 import ExportCenter from "./pages/admin/ExportCenter";
-
+import Conference from "./pages/Conference";
+import Schedule from "./pages/Schedule";
 function App() {
   return (
     <BrowserRouter>
@@ -34,7 +35,12 @@ function App() {
   element={<ExportCenter />}
 />
         <Route path="*" element={<Navigate to="/" replace />} />
+<Route
+  path="/conference"
+  element={<Conference />}
+/>  
 
+<Route path="/schedule" element={<Schedule />} />
       </Routes>
     </BrowserRouter>
   );
