@@ -150,3 +150,18 @@ export const exportReport = async (payload, token) => {
     filename,
   };
 };
+
+
+
+export const getProceedings = () =>
+  request(`${API_BASE_URL}/proceedings`);
+
+export const launchProceedings = async (token) => {
+  return request(`${API_BASE_URL}/proceedings/launch`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+

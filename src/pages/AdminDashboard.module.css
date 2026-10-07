@@ -593,3 +593,107 @@ td small {
     width: 100%;
   }
 }
+
+
+.proceedingsCard {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 30px;
+  padding: 26px 30px;
+  border: 1px solid #dce3ea;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 6px 22px rgba(15, 23, 42, 0.06);
+}
+
+.proceedingsInfo {
+  min-width: 0;
+}
+
+.proceedingsLabel {
+  display: block;
+  margin-bottom: 7px;
+  color: #b42318;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.proceedingsInfo h2 {
+  margin: 0;
+  color: #132c46;
+  font-family: Georgia, serif;
+  font-size: 24px;
+}
+
+.proceedingsInfo p {
+  margin: 7px 0 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.proceedingsAction {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.launchProceedingsButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 20px;
+  border: 0;
+  border-radius: 7px;
+  background: #132c46;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.launchProceedingsButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #1b3b5c;
+}
+
+.launchProceedingsButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.proceedingsSuccess,
+.proceedingsError {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.proceedingsSuccess {
+  color: #16803c;
+}
+
+.proceedingsError {
+  color: #b42318;
+}
+
+@media (max-width: 700px) {
+  .proceedingsCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .proceedingsAction {
+    width: 100%;
+    text-align: left;
+  }
+
+  .launchProceedingsButton {
+    width: 100%;
+  }
+}
