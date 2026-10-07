@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./ConferencePopup.module.css";
 
 function ConferencePopup({ isOpen, onClose }) {
+     
   if (!isOpen) return null;
 
   const handleOverlayClick = (e) => {
@@ -92,7 +93,7 @@ function ConferencePopup({ isOpen, onClose }) {
           </p>
 
           <a
-            href="YOUR_GOOGLE_MEET_LINK"
+            href="https://meet.google.com/zby-gcxz-uez"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.meetButton}
