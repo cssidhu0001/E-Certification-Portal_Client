@@ -1,0 +1,985 @@
+.page {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #050608;
+  color: #fff;
+}
+.ceremonyBackground {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(139, 0, 21, 0.25),
+      transparent 42%
+    ),
+    linear-gradient(
+      135deg,
+      #030406 0%,
+      #0b0d12 50%,
+      #030406 100%
+    );
+}
+
+/* =========================================
+   INITIAL CLOSED CURTAIN
+========================================= */
+.closedStage {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Heading ABOVE CURTAIN */
+
+.closedStageHeading {
+  position: absolute;
+  top: 8%;
+  left: 20px;
+  right: 20px;
+  z-index: 20;
+  text-align: center;
+}
+
+.closedStageHeading span {
+  display: block;
+
+  color: #d8b36a;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 4px;
+}
+
+.closedStageHeading h1 {
+  margin: 12px 0 4px;
+
+  color: #fff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(42px, 6vw, 78px);
+  font-weight: 500;
+
+  line-height: 0.95;
+
+  letter-spacing: 1px;
+}
+
+.closedStageHeading h2 {
+  margin: 10px 0 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: 7px;
+}
+
+.smallGoldLine {
+  width: 70px;
+  height: 1px;
+
+  margin: 22px auto 14px;
+
+  background: #d8b36a;
+}
+
+.closedStageHeading p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.4);
+
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   CLOSED CURTAINS
+========================================= */
+
+.closedCurtainLeft,
+.closedCurtainRight,
+.closedCurtainCenter {
+  position: absolute;
+  top: 0;
+  height: 100%;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #260005 0px,
+      #4d000b 16px,
+      #870015 34px,
+      #a9001d 48px,
+      #65000e 64px,
+      #2a0005 82px
+    );
+
+  box-shadow:
+    inset 0 0 70px rgba(0, 0, 0, 0.75),
+    inset 0 0 20px rgba(255, 255, 255, 0.06);
+}
+
+/* left half */
+
+.closedCurtainLeft {
+  left: 0;
+  width: 50%;
+}
+
+/* right half */
+
+.closedCurtainRight {
+  right: 0;
+  width: 50%;
+
+  transform: scaleX(-1);
+}
+
+/* center seam */
+
+.closedCurtainCenter {
+  left: 50%;
+  width: 4px;
+
+  transform: translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      #2a0005,
+      #d8b36a,
+      #2a0005
+    );
+
+  box-shadow:
+    0 0 20px rgba(216, 179, 106, 0.3);
+}
+
+/* =========================================
+   LAUNCH BUTTON
+========================================= */
+
+.launchConsole {
+  position: absolute;
+
+  left: 50%;
+  bottom: 12%;
+
+  transform: translateX(-50%);
+
+  z-index: 30;
+
+
+
+  text-align: center;
+}
+
+.authorized {
+  display: block;
+
+  margin-bottom: 14px;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.launchButton {
+  min-width: 670px;
+
+  padding: 17px 30px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 7px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #b30018,
+      #68000e
+    );
+
+  color: #fff;
+
+  font-size: 50px;
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+
+  box-shadow:
+    0 15px 40px rgba(139, 0, 21, 0.4);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.launchButton:hover:not(:disabled) {
+  transform: translateY(-3px);
+
+  background:
+    linear-gradient(
+      135deg,
+      #d00020,
+      #850012
+    );
+
+  box-shadow:
+    0 20px 50px rgba(139, 0, 21, 0.55);
+}
+
+.launchButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.launchConsole small {
+  display: block;
+
+  margin-top: 13px;
+
+  color: rgba(255, 255, 255, 0.32);
+
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.alreadyLaunched {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.alreadyLaunched span {
+  color: #52d68b;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.alreadyLaunched button {
+  padding: 12px 22px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================
+   CEREMONY
+========================================= */
+
+.ceremonyPage {
+  min-height: 100dvh;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: #020304;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 50% 45%,
+      #263849 0%,
+      #111d2a 35%,
+      #05070b 75%
+    );
+}
+
+/* =========================================
+   CEREMONY HEADING
+========================================= */
+
+.stageHeading {
+  position: absolute;
+
+  top: 6%;
+  left: 20px;
+  right: 20px;
+
+  z-index: 5;
+
+  text-align: center;
+}
+
+.stageHeading span {
+  display: block;
+
+  color: #d8b36a;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+.stageHeading h1 {
+  margin: 10px 0 5px;
+
+  color: #fff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(34px, 5vw, 64px);
+
+  font-weight: 500;
+
+  letter-spacing: 1px;
+}
+
+.stageHeading h2 {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 12px;
+  letter-spacing: 6px;
+}
+
+/* =========================================
+   LIGHT
+========================================= */
+
+.stageLight {
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 600px;
+  height: 850px;
+
+  transform: translateX(-50%);
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255, 255, 255, 0.16),
+      transparent 65%
+    );
+
+  filter: blur(18px);
+
+  pointer-events: none;
+}
+
+/* =========================================
+   HIDDEN PROCEEDINGS
+========================================= */
+
+.hiddenProceedings {
+  position: relative;
+
+  z-index: 2;
+
+  text-align: center;
+
+  color: #fff;
+}
+
+.hiddenProceedings span {
+  color: #d8b36a;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+.hiddenProceedings h3 {
+  margin: 15px 0 8px;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(36px, 6vw, 70px);
+
+  font-weight: 500;
+}
+
+.hiddenProceedings p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 12px;
+  letter-spacing: 4px;
+}
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+
+.countdown {
+  position: absolute;
+
+  z-index: 25;
+
+  color: #fff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(100px, 18vw, 210px);
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  text-shadow:
+    0 0 30px rgba(255, 255, 255, 0.2);
+
+  animation: countdownPulse 0.9s ease;
+}
+
+@keyframes countdownPulse {
+  0% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0.95;
+    transform: scale(0.95);
+  }
+}
+
+/* =========================================
+   CURTAIN
+========================================= */
+
+.curtain {
+  position: absolute;
+
+  top: 0;
+
+  width: 52%;
+
+  height: 100%;
+
+  z-index: 20;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #250005 0px,
+      #4d000b 15px,
+      #880015 31px,
+      #b0001d 46px,
+      #6a000f 61px,
+      #2a0005 80px
+    );
+
+  box-shadow:
+    inset 0 0 80px rgba(0, 0, 0, 0.8),
+    inset 0 0 25px rgba(255, 255, 255, 0.05),
+    0 0 50px rgba(0, 0, 0, 0.8);
+
+  transition:
+    transform 4s
+    cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.leftCurtain {
+  left: 0;
+
+  transform-origin: left center;
+}
+
+.rightCurtain {
+  right: 0;
+
+  transform-origin: right center;
+}
+
+.curtainOpenLeft {
+  transform: translateX(-100%);
+}
+
+.curtainOpenRight {
+  transform: translateX(100%);
+}
+
+/* curtain folds */
+
+.curtainFold {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      rgba(255, 255, 255, 0.06) 10px,
+      transparent 20px
+    );
+
+  opacity: 0.5;
+}
+
+/* =========================================
+   CURTAIN ROD
+========================================= */
+
+.curtainRod {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 8px;
+
+  z-index: 30;
+
+  background:
+    linear-gradient(
+      90deg,
+      #5c441d,
+      #d8b36a,
+      #5c441d
+    );
+
+  box-shadow:
+    0 3px 18px rgba(0, 0, 0, 0.7);
+}
+
+/* =========================================
+   STAGE FOOTER
+========================================= */
+
+.stageFooter {
+  position: absolute;
+
+  bottom: 25px;
+
+  z-index: 35;
+
+  color: rgba(255, 255, 255, 0.35);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+/* =========================================
+   THANK YOU PAGE
+========================================= */
+
+.thankYouPage {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(139, 0, 21, 0.2),
+      transparent 45%
+    ),
+    linear-gradient(
+      135deg,
+      #05070b,
+      #111722,
+      #05070b
+    );
+  color: #fff;
+}
+
+.thankYouGlow {
+  position: absolute;
+
+  width: 550px;
+  height: 550px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(139, 0, 21, 0.15);
+
+  filter: blur(100px);
+}
+
+.thankYouContent {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(850px, calc(100% - 40px));
+
+  padding: 50px 25px;
+
+  text-align: center;
+}
+
+.thankYouTop {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 45px;
+
+  color: rgba(255, 255, 255, 0.35);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.checkCircle {
+  width: 65px;
+  height: 65px;
+
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(216, 179, 106, 0.5);
+
+  background:
+    rgba(216, 179, 106, 0.08);
+
+  color: #d8b36a;
+
+  font-size: 28px;
+}
+
+.thankYouLabel {
+  color: #d8b36a;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+.thankYouContent h1 {
+  margin: 18px 0 22px;
+
+  color: #fff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(42px, 7vw, 76px);
+
+  font-weight: 500;
+
+  line-height: 1;
+}
+
+.goldLine {
+  width: 75px;
+  height: 1px;
+
+  margin: 0 auto 25px;
+
+  background: #d8b36a;
+}
+
+.thankYouContent > p {
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  color: rgba(255, 255, 255, 0.58);
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+.thankYouContent > p strong {
+  color: #fff;
+}
+
+/* =========================================
+   MIET DETAILS
+========================================= */
+
+.mietBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 30px auto;
+
+  padding: 20px 30px;
+
+  width: min(400px, 100%);
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mietBox strong {
+  color: #fff;
+
+  font-size: 13px;
+  letter-spacing: 3px;
+}
+
+.mietBox span {
+  margin-top: 6px;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 11px;
+}
+
+.mietBox small {
+  margin-top: 12px;
+
+  color: #d8b36a;
+
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+/* =========================================
+   VIEW PROCEEDINGS
+========================================= */
+
+.viewProceedingsButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  padding: 15px 28px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: #c90000;
+
+  color: #fff;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 12px 30px rgba(201, 0, 0, 0.3);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.viewProceedingsButton:hover {
+  transform: translateY(-2px);
+
+  background: #e31b1b;
+}
+
+.viewProceedingsButton span {
+  font-size: 18px;
+}
+
+/* =========================================
+   DESIGNED BY
+========================================= */
+
+.designedBy {
+  margin-top: 35px;
+
+  color: rgba(255, 255, 255, 0.3);
+
+  font-size: 9px;
+
+  letter-spacing: 1px;
+}
+
+.designedBy strong {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* =========================================
+   ERROR / LOADING
+========================================= */
+
+.error {
+  margin-top: 15px;
+
+  color: #ff6b6b;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+.loading {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #050608;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .closedStageHeading {
+    top: 7%;
+  }
+
+  .closedStageHeading h1 {
+    font-size: 42px;
+  }
+
+  .closedStageHeading h2 {
+    font-size: 10px;
+    letter-spacing: 4px;
+  }
+
+  .closedStageHeading p {
+    font-size: 9px;
+  }
+
+  .launchConsole {
+    bottom: 9%;
+  }
+
+  .launchButton {
+    width: 100%;
+  }
+
+  .stageHeading {
+    top: 7%;
+  }
+
+  .stageHeading h1 {
+    font-size: 35px;
+  }
+
+  .stageHeading h2 {
+    font-size: 10px;
+  }
+
+  .curtain {
+    width: 55%;
+  }
+
+  .hiddenProceedings h3 {
+    font-size: 40px;
+  }
+
+  .thankYouContent {
+    padding: 35px 15px;
+  }
+
+  .thankYouTop {
+    margin-bottom: 30px;
+  }
+
+  .thankYouContent h1 {
+    font-size: 45px;
+  }
+
+  .thankYouContent > p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .closedStageHeading h1 {
+    font-size: 35px;
+  }
+
+  .closedStageHeading h2 {
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+
+  .launchConsole {
+    width: calc(100% - 30px);
+  }
+
+  .stageHeading h1 {
+    font-size: 30px;
+  }
+
+  .stageHeading h2 {
+    letter-spacing: 3px;
+  }
+
+  .hiddenProceedings h3 {
+    font-size: 32px;
+  }
+
+  .thankYouContent h1 {
+    font-size: 38px;
+  }
+
+  .thankYouTop {
+    flex-direction: column;
+    gap: 7px;
+  }
+}

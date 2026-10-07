@@ -143,6 +143,46 @@ function Home() {
 </section>
 
 
+
+
+
+<section className={styles.proceedingsSection}>
+
+  <div className={styles.proceedingsCard}>
+
+    <div>
+      <div className={styles.proceedingsLabel}>
+        IANETL 2026 · PUBLICATION
+      </div>
+
+      <h2>
+        Abstract Proceedings
+      </h2>
+
+      <p>
+        Explore the official collection of abstracts
+        presented during the 3-Day International Conference.
+      </p>
+    </div>
+
+    <Link
+      to="/proceedings"
+      className={styles.proceedingsButton}
+    >
+      View Proceedings →
+    </Link>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
       <section className={styles.cards}>
         <Link to="/register" className={styles.card}>
           <span>01</span>

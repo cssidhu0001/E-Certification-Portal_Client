@@ -1,0 +1,576 @@
+.page,
+.comingPage,
+.livePage,
+.ceremonyPage {
+  min-height: 100dvh;
+  width: 100%;
+}
+
+.loading {
+  min-height: 100dvh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #64748b;
+}
+
+/* ==============================
+   COMING SOON
+============================== */
+
+.comingPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 25%,
+      rgba(16, 44, 76, 0.08),
+      transparent 45%
+    ),
+    #fafafa;
+
+  text-align: center;
+}
+
+.comingContent {
+  max-width: 700px;
+  padding: 50px 25px;
+}
+
+.comingLabel {
+  color: #c90000;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 2.5px;
+}
+
+.comingContent h1 {
+  margin: 18px 0;
+
+  color: #102c4c;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(48px, 8vw, 86px);
+
+  font-weight: 500;
+
+  line-height: 0.95;
+}
+
+.comingContent p {
+  max-width: 520px;
+
+  margin: 0 auto;
+
+  color: #64748b;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.comingSoon {
+  display: inline-block;
+
+  margin-top: 35px;
+  padding: 10px 20px;
+
+  border: 1px solid #dce3ea;
+  border-radius: 30px;
+
+  color: #102c4c;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+/* ==============================
+   CEREMONY
+============================== */
+
+.ceremonyPage {
+  overflow: hidden;
+
+  background: #05070b;
+}
+
+.ceremonyStage {
+  position: relative;
+
+  width: 100%;
+  min-height: calc(100vh - 80px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      #263b50 0%,
+      #101a27 35%,
+      #05070b 75%
+    );
+}
+
+.stageLight {
+  position: absolute;
+
+  top: -20%;
+  left: 50%;
+
+  width: 500px;
+  height: 700px;
+
+  transform: translateX(-50%);
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255, 255, 255, 0.16),
+      transparent 65%
+    );
+
+  filter: blur(15px);
+
+  pointer-events: none;
+}
+
+.ceremonyTitle {
+  position: relative;
+  z-index: 2;
+
+  text-align: center;
+
+  color: #fff;
+}
+
+.ceremonyTitle span {
+  color: #d8b36a;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+.ceremonyTitle h1 {
+  margin: 15px 0 0;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(38px, 6vw, 72px);
+
+  font-weight: 500;
+}
+
+/* ==============================
+   COUNTDOWN
+============================== */
+
+.countdown {
+  position: absolute;
+  z-index: 20;
+
+  color: #fff;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(90px, 16vw, 180px);
+
+  font-weight: 500;
+
+  text-shadow:
+    0 0 30px rgba(255, 255, 255, 0.25);
+}
+
+/* ==============================
+   CURTAINS
+============================== */
+
+.curtain {
+  position: absolute;
+
+  top: 0;
+
+  width: 53%;
+  height: 100%;
+
+  z-index: 10;
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #350008 0px,
+      #780013 25px,
+      #a6001b 48px,
+      #52000c 72px,
+      #260005 100px
+    );
+
+  box-shadow:
+    inset 0 0 80px rgba(0, 0, 0, 0.7),
+    inset 0 0 25px rgba(255, 255, 255, 0.06),
+    0 0 60px rgba(0, 0, 0, 0.8);
+
+  transition:
+    transform 4.2s cubic-bezier(
+      0.77,
+      0,
+      0.175,
+      1
+    );
+}
+
+.curtainLeft {
+  left: 0;
+
+  transform-origin: left center;
+}
+
+.curtainRight {
+  right: 0;
+
+  transform-origin: right center;
+}
+
+.stageOpening .curtainLeft {
+  transform: translateX(-100%);
+}
+
+.stageOpening .curtainRight {
+  transform: translateX(100%);
+}
+
+.curtainRod {
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+  height: 9px;
+
+  z-index: 15;
+
+  background: #d8b36a;
+
+  box-shadow:
+    0 2px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* ==============================
+   CEREMONY FOOTER
+============================== */
+
+.ceremonyBottom {
+  position: absolute;
+
+  bottom: 30px;
+
+  z-index: 16;
+
+  color: rgba(255, 255, 255, 0.45);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+/* ==============================
+   LIVE PAGE
+============================== */
+
+.livePage {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(139, 0, 21, 0.22),
+      transparent 45%
+    ),
+    linear-gradient(
+      135deg,
+      #05070b,
+      #101722
+    );
+
+  color: #fff;
+}
+
+.liveGlow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background: rgba(139, 0, 21, 0.15);
+
+  filter: blur(100px);
+}
+
+.liveContent {
+  position: relative;
+  z-index: 2;
+
+  max-width: 800px;
+
+  padding: 50px 25px;
+
+  text-align: center;
+}
+
+.liveLabel {
+  color: #d8b36a;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+.liveLine {
+  width: 60px;
+  height: 1px;
+
+  margin: 22px auto;
+
+  background: #d8b36a;
+}
+
+.liveContent h1 {
+  margin: 0;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(48px, 8vw, 88px);
+
+  font-weight: 500;
+
+  line-height: 0.98;
+
+  text-transform: none;
+}
+
+.liveContent p {
+  max-width: 550px;
+
+  margin: 25px auto 0;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+.readButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  margin-top: 35px;
+
+  padding: 15px 24px;
+
+  border-radius: 7px;
+
+  background: #c90000;
+
+  color: #fff;
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  transition: 0.25s ease;
+}
+
+.readButton:hover {
+  transform: translateY(-2px);
+
+  background: #e31b1b;
+
+  box-shadow:
+    0 12px 30px rgba(201, 0, 0, 0.3);
+}
+
+.readButton span {
+  font-size: 18px;
+}
+
+.launchedAt {
+  display: block;
+
+  margin-top: 18px;
+
+  color: rgba(255, 255, 255, 0.3);
+
+  font-size: 9px;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+.noLink {
+  margin-top: 30px;
+
+  color: #f59e0b;
+
+  font-size: 12px;
+}
+
+@media (max-width: 700px) {
+  .ceremonyTitle h1 {
+    font-size: 40px;
+  }
+
+  .curtain {
+    width: 55%;
+  }
+
+  .liveContent h1 {
+    font-size: 52px;
+  }
+}
+
+
+.countdownWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 35px;
+  padding: 20px 25px;
+
+  border-top: 1px solid #dce3ea;
+  border-bottom: 1px solid #dce3ea;
+
+  gap: 18px;
+}
+
+.countdownItem {
+  min-width: 70px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdownItem strong {
+  color: #102c4c;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 34px;
+  font-weight: 500;
+
+  line-height: 1;
+}
+
+.countdownItem span {
+  margin-top: 8px;
+
+  color: #7a8490;
+
+  font-size: 8px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.countdownSeparator {
+  margin-top: -12px;
+
+  color: #c90000;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 28px;
+}
+
+@media (max-width: 600px) {
+  .countdownWrapper {
+    gap: 7px;
+    padding: 16px 8px;
+  }
+
+  .countdownItem {
+    min-width: 55px;
+  }
+
+  .countdownItem strong {
+    font-size: 25px;
+  }
+
+  .countdownItem span {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+
+  .countdownSeparator {
+    font-size: 21px;
+  }
+}
+
+
+.eventInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 35px;
+}
+
+.eventInfo span {
+  color: #c90000;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.eventInfo strong {
+  color: #102c4c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.eventInfo small {
+  color: #7a8490;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}

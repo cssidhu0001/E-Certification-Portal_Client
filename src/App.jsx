@@ -10,6 +10,8 @@ import Contact from "./pages/Contact";
 import ExportCenter from "./pages/admin/ExportCenter";
 import Conference from "./pages/Conference";
 import Schedule from "./pages/Schedule";
+import Proceedings from "./pages/Proceedings";
+import ChiefGuestLaunch from "./pages/ChiefGuestLaunch";
 function App() {
   return (
     <BrowserRouter>
@@ -39,8 +41,15 @@ function App() {
   path="/conference"
   element={<Conference />}
 />  
-
+<Route
+  path="/proceedings"
+  element={<Proceedings />}
+/>
 <Route path="/schedule" element={<Schedule />} />
+<Route
+  path="/admin/proceedings-launch"
+  element={<ChiefGuestLaunch />}
+/>
       </Routes>
     </BrowserRouter>
   );
