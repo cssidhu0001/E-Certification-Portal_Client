@@ -5,6 +5,7 @@ import {
   getProceedings,
 } from "../services/api";
 import styles from "./ChiefGuestLaunch.module.css";
+import PageNavigation from "../components/PageNavigation";
 
 function ChiefGuestLaunch() {
   const navigate = useNavigate();
@@ -401,7 +402,7 @@ function ChiefGuestLaunch() {
         </div>
 
       </section>
-
+<PageNavigation/>
     </main>
   );
 }

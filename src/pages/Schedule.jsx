@@ -1,3 +1,4 @@
+import PageNavigation from "../components/PageNavigation";
 import PageShell from "../components/PageShell";
 import styles from "./Schedule.module.css";
 
@@ -278,6 +279,7 @@ function Schedule() {
           <ScheduleTable day="Day 03" items={day3} />
         </div>
       </main>
+      <PageNavigation/>
     </PageShell>
   );
 }

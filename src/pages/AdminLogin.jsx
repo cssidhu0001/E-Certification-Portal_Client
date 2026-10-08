@@ -2,6 +2,7 @@ import { useState } from "react";
 import {Link, useNavigate } from "react-router-dom";
 import { adminLogin } from "../services/api";
 import styles from "./AdminLogin.module.css";
+import PageNavigation from "../components/PageNavigation";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -70,6 +71,7 @@ function AdminLogin() {
           </button>
         </form>
       </div>
+      <PageNavigation/>
     </main>
   );
 }

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { getProceedings } from "../services/api";
 import styles from "./Proceedings.module.css";
+import PageNavigation from "../components/PageNavigation";
 
 const BACKEND_URL = import.meta.env.VITE_API_URL.replace(
   /\/api$/,
@@ -512,6 +513,7 @@ function Proceedings() {
             </div>
           )}
 
+        <PageNavigation/>
         </section>
       </main>
     );
@@ -576,8 +578,8 @@ function Proceedings() {
           OFFICIAL PROCEEDINGS LAUNCH
         </div>
 
+<PageNavigation/>
       </div>
-
     </main>
   );
 }

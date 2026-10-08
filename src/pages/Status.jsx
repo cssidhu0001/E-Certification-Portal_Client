@@ -5,6 +5,7 @@ import {
   downloadCertificate,
 } from "../services/api";
 import styles from "./Status.module.css";
+import PageNavigation from "../components/PageNavigation";
 
 function Status() {
   const [email, setEmail] = useState("");
@@ -221,6 +222,7 @@ function Status() {
           </section>
         )}
       </div>
+      <PageNavigation/>
     </PageShell>
   );
 }

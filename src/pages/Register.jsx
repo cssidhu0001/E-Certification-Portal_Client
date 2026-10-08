@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PageShell from "../components/PageShell";
 import { registerCandidate } from "../services/api";
 import styles from "./Register.module.css";
+import PageNavigation from "../components/PageNavigation";
 
 const MAX_TITLE_LENGTH = 145;
 
@@ -445,6 +446,7 @@ function Register() {
             </div>
           </div>
         )}
+        <PageNavigation/>
       </div>
     </PageShell>
   );
