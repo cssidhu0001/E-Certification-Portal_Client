@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
+import { Link } from "react-router-dom";
 
 import { getProceedings } from "../services/api";
-
 import styles from "./Proceedings.module.css";
 
 const BACKEND_URL = import.meta.env.VITE_API_URL.replace(
@@ -12,30 +12,30 @@ const BACKEND_URL = import.meta.env.VITE_API_URL.replace(
 
 function Proceedings() {
   const [proceedings, setProceedings] = useState(null);
-
   const [loading, setLoading] = useState(true);
 
   const [revealing, setRevealing] = useState(false);
-
   const [countdown, setCountdown] = useState(null);
-
   const [revealed, setRevealed] = useState(false);
 
-  // Coming Soon countdown
   const [timeLeft, setTimeLeft] = useState(null);
 
   const revealStarted = useRef(false);
+  const revealTimers = useRef([]);
 
-  /*
-   * ==========================================
-   * START CURTAIN REVEAL
-   * ==========================================
-   */
+  /* ==========================================
+     START CURTAIN REVEAL
+  ========================================== */
 
   const startReveal = () => {
-    if (revealStarted.current) return;
+    if (revealStarted.current) {
+      return;
+    }
 
     revealStarted.current = true;
+
+    revealTimers.current.forEach(clearTimeout);
+    revealTimers.current = [];
 
     setRevealing(true);
     setRevealed(false);
@@ -43,39 +43,42 @@ function Proceedings() {
     // 3
     setCountdown(3);
 
-    // 2
-    setTimeout(() => {
+    const timer2 = setTimeout(() => {
       setCountdown(2);
     }, 1000);
 
-    // 1
-    setTimeout(() => {
+    // 2 → 1
+    const timer1 = setTimeout(() => {
       setCountdown(1);
     }, 2000);
 
     // Start curtain opening
-    setTimeout(() => {
+    const timerOpening = setTimeout(() => {
       setCountdown(0);
     }, 3000);
 
-    /*
-     * Curtain animation takes around 4 seconds.
-     */
-
-    setTimeout(() => {
+    // Reveal live page
+    const timerReveal = setTimeout(() => {
       setRevealed(true);
     }, 6500);
 
-    setTimeout(() => {
+    // Finish ceremony
+    const timerFinish = setTimeout(() => {
       setRevealing(false);
     }, 7200);
+
+    revealTimers.current = [
+      timer2,
+      timer1,
+      timerOpening,
+      timerReveal,
+      timerFinish,
+    ];
   };
 
-  /*
-   * ==========================================
-   * LOAD PROCEEDINGS
-   * ==========================================
-   */
+  /* ==========================================
+     LOAD PROCEEDINGS
+  ========================================== */
 
   useEffect(() => {
     let mounted = true;
@@ -84,28 +87,22 @@ function Proceedings() {
       try {
         const data = await getProceedings();
 
-        if (!mounted) return;
+        if (!mounted) {
+          return;
+        }
 
         const item = data?.proceedings;
 
         setProceedings(item);
 
-        /*
-         * If proceedings were already launched
-         * before this user opened the page,
-         * directly show the live page.
-         *
-         * No curtain animation.
-         */
-
+        // Already launched → directly show proceedings
         if (item?.launched) {
           setRevealed(true);
+          setRevealing(false);
+          setTimeLeft(null);
         }
       } catch (error) {
-        console.error(
-          "Proceedings load error:",
-          error
-        );
+        console.error("Proceedings load error:", error);
       } finally {
         if (mounted) {
           setLoading(false);
@@ -120,18 +117,10 @@ function Proceedings() {
     };
   }, []);
 
-  /*
-   * ==========================================
-   * COMING SOON COUNTDOWN
-   * ==========================================
-   *
-   * FRONTEND ONLY
-   *
-   * 09 October 2026
-   * 10:00 AM IST
-   *
-   * No backend launchDate used.
-   */
+  /* ==========================================
+     FRONTEND COUNTDOWN
+     09 OCTOBER 2026 — 10:00 AM IST
+  ========================================== */
 
   useEffect(() => {
     const targetTime = new Date(
@@ -153,20 +142,15 @@ function Proceedings() {
       }
 
       const days = Math.floor(
-        difference /
-          (1000 * 60 * 60 * 24)
+        difference / (1000 * 60 * 60 * 24)
       );
 
       const hours = Math.floor(
-        (difference /
-          (1000 * 60 * 60)) %
-          24
+        (difference / (1000 * 60 * 60)) % 24
       );
 
       const minutes = Math.floor(
-        (difference /
-          (1000 * 60)) %
-          60
+        (difference / (1000 * 60)) % 60
       );
 
       const seconds = Math.floor(
@@ -181,10 +165,8 @@ function Proceedings() {
       });
     };
 
-    // Run immediately
     updateCountdown();
 
-    // Update every second
     const interval = setInterval(
       updateCountdown,
       1000
@@ -195,18 +177,13 @@ function Proceedings() {
     };
   }, []);
 
-  /*
-   * ==========================================
-   * SOCKET.IO
-   * ==========================================
-   */
+  /* ==========================================
+     SOCKET.IO
+  ========================================== */
 
   useEffect(() => {
     const socket = io(BACKEND_URL, {
-      transports: [
-        "websocket",
-        "polling",
-      ],
+      transports: ["websocket", "polling"],
     });
 
     socket.on("connect", () => {
@@ -216,56 +193,33 @@ function Proceedings() {
       );
     });
 
-    socket.on(
-      "connect_error",
-      (error) => {
-        console.error(
-          "Proceedings Socket error:",
-          error.message
-        );
+    socket.on("connect_error", (error) => {
+      console.error(
+        "Proceedings Socket error:",
+        error.message
+      );
+    });
+
+    socket.on("proceedings:launch", (data) => {
+      console.log(
+        "🔥 Proceedings launch received:",
+        data
+      );
+
+      if (revealStarted.current) {
+        return;
       }
-    );
 
-    /*
-     * Chief Guest launches proceedings.
-     * All currently connected users receive
-     * this event.
-     */
+      setProceedings((previous) => ({
+        ...(previous || {}),
+        ...(data || {}),
+        launched: true,
+      }));
 
-    socket.on(
-      "proceedings:launch",
-      (data) => {
-        console.log(
-          "🔥 Proceedings launch received:",
-          data
-        );
+      setTimeLeft(null);
 
-        if (revealStarted.current) {
-          return;
-        }
-
-        setProceedings((previous) => ({
-          ...previous,
-          ...data,
-          launched: true,
-        }));
-
-        /*
-         * Remove Coming Soon countdown
-         */
-
-        setTimeLeft(null);
-
-        /*
-         * Start local curtain ceremony.
-         *
-         * Animation is independent from the
-         * Socket connection after this point.
-         */
-
-        startReveal();
-      }
-    );
+      startReveal();
+    });
 
     socket.on("disconnect", () => {
       console.log(
@@ -278,11 +232,20 @@ function Proceedings() {
     };
   }, []);
 
-  /*
-   * ==========================================
-   * LOADING
-   * ==========================================
-   */
+  /* ==========================================
+     CLEANUP
+  ========================================== */
+
+  useEffect(() => {
+    return () => {
+      revealTimers.current.forEach(clearTimeout);
+      revealTimers.current = [];
+    };
+  }, []);
+
+  /* ==========================================
+     LOADING
+  ========================================== */
 
   if (loading) {
     return (
@@ -294,14 +257,9 @@ function Proceedings() {
     );
   }
 
-  /*
-   * ==========================================
-   * LIVE STATE
-   * ==========================================
-   *
-   * Already launched users directly see
-   * the proceedings page.
-   */
+  /* ==========================================
+     LIVE STATE
+  ========================================== */
 
   if (revealed && !revealing) {
     return (
@@ -309,6 +267,9 @@ function Proceedings() {
         <div className={styles.liveGlow}></div>
 
         <section className={styles.liveContent}>
+
+          {/* HEADER */}
+
           <span className={styles.liveLabel}>
             ABSTRACT PROCEEDINGS
           </span>
@@ -327,131 +288,242 @@ function Proceedings() {
             public viewing.
           </p>
 
-          {proceedings?.heyzineUrl ? (
-            <a
-              href={proceedings.heyzineUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.readButton}
-            >
-              Read Abstract Proceedings
-              <span>→</span>
-            </a>
-          ) : (
-            <div className={styles.noLink}>
-              Proceedings link will be available
-              shortly.
-            </div>
-          )}
+          {/* LAUNCH STATUS */}
 
           {proceedings?.launchedAt && (
             <span className={styles.launchedAt}>
               Officially launched
             </span>
           )}
+
+          {/* HEYZINE FLIPBOOK */}
+
+          {proceedings?.heyzineUrl ? (
+            <>
+              <div className={styles.bookViewer}>
+                <iframe
+                  src={proceedings.heyzineUrl}
+                  title="IANETL 2026 Abstract Proceedings"
+                  allowFullScreen
+                  allow="autoplay; fullscreen; clipboard-write"
+                  scrolling="no"
+                />
+              </div>
+
+              {/* ACTION BUTTONS */}
+
+              <div className={styles.proceedingsActions}>
+
+                {/* READ */}
+
+                <a
+                  href={proceedings.heyzineUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.actionButton} ${styles.primaryButton}`}
+                >
+                  <span>📖</span>
+                  Read Proceedings
+                  <strong>↗</strong>
+                </a>
+
+                {/* DOWNLOAD */}
+
+                <a
+                  href="/proceedings.pdf"
+                  download
+                  className={styles.actionButton}
+                >
+                  <span>↓</span>
+                  Download Proceedings
+                </a>
+
+                {/* BACK */}
+
+                <button
+                  type="button"
+                  className={styles.actionButton}
+                  onClick={() => window.history.back()}
+                >
+                  <span>←</span>
+                  Back
+                </button>
+
+                {/* HOME */}
+
+                <Link
+                  to="/"
+                  className={styles.actionButton}
+                >
+                  <span>⌂</span>
+                  Home
+                </Link>
+
+              </div>
+            </>
+          ) : (
+            <div className={styles.noLink}>
+              Proceedings link will be available shortly.
+            </div>
+          )}
+
         </section>
       </main>
     );
   }
 
-  /*
-   * ==========================================
-   * BEFORE LAUNCH / COMING SOON
-   * ==========================================
-   */
+  /* ==========================================
+     BEFORE LAUNCH / COMING SOON
+  ========================================== */
 
- if (!revealing) {
-  return (
-    <main className={styles.comingPage}>
-      <section className={styles.comingContent}>
+  if (!revealing) {
+    return (
+      <main className={styles.comingPage}>
+        <section className={styles.comingContent}>
 
-        <div className={styles.eventInfo}>
-          <span>IANETL 2026</span>
+          {/* EVENT INFORMATION */}
 
-          <strong>
-            09–11 OCTOBER 2026
-          </strong>
+          <div className={styles.eventInfo}>
+            <span>
+              IANETL 2026
+            </span>
 
-          <small>
-            ABSTRACT PROCEEDINGS RELEASE • 09 OCTOBER 2026
-          </small>
-        </div>
+            <strong>
+              09–11 OCTOBER 2026
+            </strong>
 
-        <span className={styles.comingLabel}>
-          IANETL 2026
-        </span>
-
-        <h1>
-          Abstract
-          <br />
-          Proceedings
-        </h1>
-
-        <p>
-          The official conference abstract
-          proceedings will be unveiled here.
-        </p>
-
-        <div className={styles.comingSoon}>
-          COMING SOON
-        </div>
-
-        {timeLeft && (
-          <div className={styles.countdownWrapper}>
-            <div className={styles.countdownItem}>
-              <strong>
-                {String(timeLeft.days).padStart(2, "0")}
-              </strong>
-              <span>DAYS</span>
-            </div>
-
-            <div className={styles.countdownSeparator}>
-              :
-            </div>
-
-            <div className={styles.countdownItem}>
-              <strong>
-                {String(timeLeft.hours).padStart(2, "0")}
-              </strong>
-              <span>HOURS</span>
-            </div>
-
-            <div className={styles.countdownSeparator}>
-              :
-            </div>
-
-            <div className={styles.countdownItem}>
-              <strong>
-                {String(timeLeft.minutes).padStart(2, "0")}
-              </strong>
-              <span>MINUTES</span>
-            </div>
-
-            <div className={styles.countdownSeparator}>
-              :
-            </div>
-
-            <div className={styles.countdownItem}>
-              <strong>
-                {String(timeLeft.seconds).padStart(2, "0")}
-              </strong>
-              <span>SECONDS</span>
-            </div>
+            <small>
+              ABSTRACT PROCEEDINGS RELEASE
+              {" • "}
+              09 OCTOBER 2026
+            </small>
           </div>
-        )}
 
-      </section>
-    </main>
-  );
-}
-  /*
-   * ==========================================
-   * CURTAIN REVEAL
-   * ==========================================
-   */
+          {/* PAGE LABEL */}
+
+          <span className={styles.comingLabel}>
+            IANETL 2026
+          </span>
+
+          {/* TITLE */}
+
+          <h1>
+            Abstract
+            <br />
+            Proceedings
+          </h1>
+
+          <p>
+            The official conference abstract
+            proceedings will be unveiled here.
+          </p>
+
+          {/* COMING SOON */}
+
+          <div className={styles.comingSoon}>
+            COMING SOON
+          </div>
+
+          {/* COUNTDOWN */}
+
+          {timeLeft && (
+            <div className={styles.countdownWrapper}>
+
+              {/* DAYS */}
+
+              <div className={styles.countdownItem}>
+                <strong>
+                  {String(
+                    timeLeft.days
+                  ).padStart(2, "0")}
+                </strong>
+
+                <span>
+                  DAYS
+                </span>
+              </div>
+
+              <div
+                className={
+                  styles.countdownSeparator
+                }
+              >
+                :
+              </div>
+
+              {/* HOURS */}
+
+              <div className={styles.countdownItem}>
+                <strong>
+                  {String(
+                    timeLeft.hours
+                  ).padStart(2, "0")}
+                </strong>
+
+                <span>
+                  HOURS
+                </span>
+              </div>
+
+              <div
+                className={
+                  styles.countdownSeparator
+                }
+              >
+                :
+              </div>
+
+              {/* MINUTES */}
+
+              <div className={styles.countdownItem}>
+                <strong>
+                  {String(
+                    timeLeft.minutes
+                  ).padStart(2, "0")}
+                </strong>
+
+                <span>
+                  MINUTES
+                </span>
+              </div>
+
+              <div
+                className={
+                  styles.countdownSeparator
+                }
+              >
+                :
+              </div>
+
+              {/* SECONDS */}
+
+              <div className={styles.countdownItem}>
+                <strong>
+                  {String(
+                    timeLeft.seconds
+                  ).padStart(2, "0")}
+                </strong>
+
+                <span>
+                  SECONDS
+                </span>
+              </div>
+
+            </div>
+          )}
+
+        </section>
+      </main>
+    );
+  }
+
+  /* ==========================================
+     CURTAIN REVEAL CEREMONY
+  ========================================== */
 
   return (
     <main className={styles.ceremonyPage}>
+
       <div
         className={`${styles.ceremonyStage} ${
           countdown === 0
@@ -459,7 +531,12 @@ function Proceedings() {
             : ""
         }`}
       >
+
+        {/* STAGE LIGHT */}
+
         <div className={styles.stageLight}></div>
+
+        {/* CEREMONY TITLE */}
 
         <div className={styles.ceremonyTitle}>
           <span>
@@ -471,24 +548,36 @@ function Proceedings() {
           </h1>
         </div>
 
+        {/* COUNTDOWN */}
+
         <div className={styles.countdown}>
           {countdown > 0 && countdown}
         </div>
+
+        {/* LEFT CURTAIN */}
 
         <div
           className={`${styles.curtain} ${styles.curtainLeft}`}
         ></div>
 
+        {/* RIGHT CURTAIN */}
+
         <div
           className={`${styles.curtain} ${styles.curtainRight}`}
         ></div>
 
+        {/* CURTAIN ROD */}
+
         <div className={styles.curtainRod}></div>
+
+        {/* BOTTOM LABEL */}
 
         <div className={styles.ceremonyBottom}>
           OFFICIAL PROCEEDINGS LAUNCH
         </div>
+
       </div>
+
     </main>
   );
 }
