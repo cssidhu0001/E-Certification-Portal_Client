@@ -7,6 +7,7 @@ import {
   downloadCertificate,
 } from "../services/api";
 import styles from "./Verify.module.css";
+import PageNavigation from "../components/PageNavigation";
 
 function Verify() {
   const { certificateId } = useParams();
@@ -244,6 +245,8 @@ function Verify() {
           </>
         )}
       </div>
+
+      <PageNavigation/>
     </PageShell>
   );
 }

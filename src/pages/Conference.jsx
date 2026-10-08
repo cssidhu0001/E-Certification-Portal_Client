@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import PageShell from "../components/PageShell";
 import styles from "./Conference.module.css";
+import PageNavigation from "../components/PageNavigation";
 
 function Conference() {
    
@@ -244,7 +245,7 @@ function Conference() {
           </div>
 
         </section>
-
+<PageNavigation/>
       </main>
     </PageShell>
   );

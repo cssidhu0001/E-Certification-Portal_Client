@@ -1,3 +1,4 @@
+import PageNavigation from "../components/PageNavigation";
 import PageShell from "../components/PageShell";
 import styles from "./Contact.module.css";
 
@@ -260,6 +261,7 @@ function Contact() {
             </div>
           </div>
         </section>
+        <PageNavigation/>
       </main>
     </PageShell>
   );

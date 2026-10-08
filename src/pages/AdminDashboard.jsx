@@ -8,6 +8,7 @@ import {
 } from "../services/api";
 
 import styles from "./AdminDashboard.module.css";
+import PageNavigation from "../components/PageNavigation";
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -528,6 +529,8 @@ function AdminDashboard() {
           </div>
         )}
       </section>
+
+      <PageNavigation/>
 
       {/* =========================
           PROCESSING MODAL
