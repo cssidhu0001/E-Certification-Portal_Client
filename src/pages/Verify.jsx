@@ -246,7 +246,7 @@ function Verify() {
         )}
       </div>
 
-      <PageNavigation/>
+      <PageNavigation />
     </PageShell>
   );
 }
@@ -263,26 +263,31 @@ function CertificateDetails({
   return (
     <section className={styles.resultWrapper}>
       <section className={styles.card}>
+        {/* CERTIFICATE ID */}
         <div>
           <span>Certificate ID</span>
           <strong>{certificate.certificateId}</strong>
         </div>
 
+        {/* PARTICIPANT */}
         <div>
           <span>Participant</span>
           <strong>{certificate.name}</strong>
         </div>
 
+        {/* EMAIL */}
         <div>
           <span>Email</span>
           <strong>{certificate.email}</strong>
         </div>
 
+        {/* INSTITUTION */}
         <div>
           <span>Institution</span>
           <strong>{certificate.institution}</strong>
         </div>
 
+        {/* DESIGNATION */}
         {certificate.designation && (
           <div>
             <span>Designation</span>
@@ -290,23 +295,70 @@ function CertificateDetails({
           </div>
         )}
 
+        {/* CERTIFICATE TYPE */}
         <div>
           <span>Certificate Type</span>
           <strong>{certificate.certificateType}</strong>
         </div>
 
+        {/* PARTICIPATION */}
         <div>
           <span>Participation</span>
           <strong>{certificate.participationType}</strong>
         </div>
 
+        {/* EVENT */}
         <div>
           <span>Event</span>
           <strong>{certificate.eventName}</strong>
         </div>
 
+        {/* VERIFIED BY */}
+        {certificate.approvedBy && (
+          <div>
+            <span>Verified By</span>
+
+            <strong>
+              {certificate.approvedBy.name}
+            </strong>
+
+            {certificate.approvedBy.designation && (
+              <small
+                style={{
+                  display: "block",
+                  marginTop: "4px",
+                  color: "#777",
+                  fontSize: "12px",
+                  fontWeight: "500",
+                }}
+              >
+                {certificate.approvedBy.designation}
+              </small>
+            )}
+          </div>
+        )}
+
+        {/* APPROVED DATE */}
+        {certificate.approvedAt && (
+          <div>
+            <span>Verified On</span>
+
+            <strong>
+              {new Date(
+                certificate.approvedAt
+              ).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric",
+              })}
+            </strong>
+          </div>
+        )}
+
+        {/* STATUS */}
         <div>
           <span>Status</span>
+
           <strong className={styles.valid}>
             ✓ Valid Certificate
           </strong>

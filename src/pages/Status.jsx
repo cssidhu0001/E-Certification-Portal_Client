@@ -45,11 +45,12 @@ function Status() {
 
   // ==========================================
   // DOWNLOAD CERTIFICATE
-  // Common function from api.js
   // ==========================================
   const handleDownload = async () => {
     if (!candidate?.certificateUrl) {
-      setError("Certificate download is not available yet.");
+      setError(
+        "Certificate download is not available yet."
+      );
       return;
     }
 
@@ -84,8 +85,8 @@ function Status() {
           <h1>Certificate Status</h1>
 
           <p>
-            Enter the email used during registration to check
-            your status.
+            Enter the email used during registration to
+            check your status.
           </p>
         </header>
 
@@ -102,7 +103,9 @@ function Status() {
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) =>
+                setEmail(e.target.value)
+              }
               placeholder="you@example.com"
               autoComplete="email"
               required
@@ -133,6 +136,9 @@ function Status() {
         ========================================== */}
         {candidate && (
           <section className={styles.result}>
+            {/* ==========================================
+                RESULT HEADER
+            ========================================== */}
             <div className={styles.resultTop}>
               <div>
                 <small>CANDIDATE</small>
@@ -147,8 +153,11 @@ function Status() {
               />
             </div>
 
-            {/* DETAILS */}
+            {/* ==========================================
+                DETAILS
+            ========================================== */}
             <div className={styles.details}>
+              {/* PARTICIPATION */}
               <div>
                 <span>Participation</span>
 
@@ -158,6 +167,7 @@ function Status() {
                 </strong>
               </div>
 
+              {/* CERTIFICATE ID */}
               <div>
                 <span>Certificate ID</span>
 
@@ -167,6 +177,7 @@ function Status() {
                 </strong>
               </div>
 
+              {/* CERTIFICATE TYPE */}
               <div>
                 <span>Certificate Type</span>
 
@@ -176,17 +187,74 @@ function Status() {
                 </strong>
               </div>
 
+              {/* EVENT */}
               <div>
                 <span>Event</span>
 
                 <strong>
-                  {candidate.eventName ||"1st International Conference - IANETL 2026"}
+                  {candidate.eventName ||
+                    "1st International Conference - IANETL 2026"}
                 </strong>
               </div>
+
+              {/* ==========================================
+                  VERIFIED BY
+              ========================================== */}
+              {candidate.status === "Approved" &&
+                candidate.approvedBy && (
+                  <div>
+                    <span>Verified By</span>
+
+                    <strong>
+                      {candidate.approvedBy.name}
+                    </strong>
+
+                    {candidate.approvedBy
+                      .designation && (
+                      <small
+                        style={{
+                          display: "block",
+                          marginTop: "4px",
+                          color: "#777",
+                          fontSize: "12px",
+                          fontWeight: "500",
+                        }}
+                      >
+                        {
+                          candidate.approvedBy
+                            .designation
+                        }
+                      </small>
+                    )}
+                  </div>
+                )}
+
+              {/* ==========================================
+                  VERIFIED ON
+              ========================================== */}
+              {candidate.status === "Approved" &&
+                candidate.approvedAt && (
+                  <div>
+                    <span>Verified On</span>
+
+                    <strong>
+                      {new Date(
+                        candidate.approvedAt
+                      ).toLocaleDateString(
+                        "en-IN",
+                        {
+                          day: "2-digit",
+                          month: "long",
+                          year: "numeric",
+                        }
+                      )}
+                    </strong>
+                  </div>
+                )}
             </div>
 
             {/* ==========================================
-                DOWNLOAD
+                DOWNLOAD CERTIFICATE
             ========================================== */}
             {candidate.status === "Approved" &&
               candidate.certificateUrl && (
@@ -202,27 +270,35 @@ function Status() {
                 </button>
               )}
 
-            {/* Pending message */}
+            {/* ==========================================
+                PENDING MESSAGE
+            ========================================== */}
             {candidate.status === "Pending" && (
               <div className={styles.pendingMessage}>
-                Your registration is currently under review.
-                Your certificate will be available after
-                approval.
+                Your registration is currently under
+                review. Your certificate will be
+                available after approval.
               </div>
             )}
 
-            {/* Rejected message */}
+            {/* ==========================================
+                REJECTED MESSAGE
+            ========================================== */}
             {candidate.status === "Rejected" && (
               <div className={styles.rejectedMessage}>
-                Your registration has not been approved.
-                Please contact the conference team for
-                further assistance.
+                Your registration has not been
+                approved. Please contact the conference
+                team for further assistance.
               </div>
             )}
           </section>
         )}
       </div>
-      <PageNavigation/>
+
+      {/* ==========================================
+          BACK / HOME NAVIGATION
+      ========================================== */}
+      <PageNavigation />
     </PageShell>
   );
 }
