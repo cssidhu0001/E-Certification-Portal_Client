@@ -1,12 +1,12 @@
-import { useState } from "react";
-import ConferencePopup from "../components/ConferencePopup";
+// import { useState } from "react";
+// import ConferencePopup from "../components/ConferencePopup";
 import { Link } from "react-router-dom";
 import PageShell from "../components/PageShell";
 import styles from "./Home.module.css";
 
 
 function Home() {
-  const [conferenceOpen, setConferenceOpen] = useState(true);
+  // const [conferenceOpen, setConferenceOpen] = useState(true);
   return (
     <PageShell>
       <section className={styles.hero}>
@@ -61,7 +61,7 @@ function Home() {
 
 
 
-<div className={styles.virtualConferenceSection}>
+{/* <div className={styles.virtualConferenceSection}>
   <button
     type="button"
     className={styles.virtualConferenceCard}
@@ -89,7 +89,7 @@ function Home() {
       →
     </div>
   </button>
-</div>
+</div> */}
 
 
 
