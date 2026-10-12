@@ -308,7 +308,7 @@ function AdminDashboard() {
           ABSTRACT PROCEEDINGS
       ========================== */}
 
-      {/* <section
+      <section
         className={
           styles.proceedingsCard
         }
@@ -376,7 +376,7 @@ function AdminDashboard() {
             </div>
           )}
         </div>
-      </section> */}
+      </section>
 
       {/* =========================
           STATS
