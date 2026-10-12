@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./ConferencePopup.module.css";
-import PageNavigation from "./PageNavigation";
+// import PageNavigation from "./PageNavigation";
 
 function ConferencePopup({ isOpen, onClose }) {
      

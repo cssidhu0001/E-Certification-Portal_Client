@@ -37,15 +37,15 @@ function App() {
   element={<ExportCenter />}
 />
         <Route path="*" element={<Navigate to="/" replace />} />
-<Route
+{/* <Route
   path="/conference"
   element={<Conference />}
-/>  
+/>   */}
 <Route
   path="/proceedings"
   element={<Proceedings />}
 />
-<Route path="/schedule" element={<Schedule />} />
+{/* <Route path="/schedule" element={<Schedule />} /> */}
 <Route
   path="/admin/proceedings-launch"
   element={<ChiefGuestLaunch />}

@@ -95,7 +95,7 @@ function Home() {
 
 
 
-<section className={styles.liveSessionSection}>
+{/* <section className={styles.liveSessionSection}>
   <div className={styles.liveSessionCard}>
 
     <div className={styles.liveSessionContent}>
@@ -140,7 +140,7 @@ function Home() {
     </div>
 
   </div>
-</section>
+</section> */}
 
 
 
@@ -260,10 +260,10 @@ function Home() {
           </a>
         </span>
       </footer>
-      <ConferencePopup
+      {/* <ConferencePopup
   isOpen={conferenceOpen}
   onClose={() => setConferenceOpen(false)}
-/>
+/> */}
     </PageShell>
     
   );
