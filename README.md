@@ -24,6 +24,7 @@ From user registration and admin verification to automated PDF certificate gener
 * **PDF Generation:** Puppeteer
 * **QR Code Integration:** QRCode
 * **Language:** JavaScript
+* **Storage:** Cloudinary
 
 ## ⚙️ How It Works
 
