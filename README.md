@@ -1,7 +1,5 @@
 # 🎓 Custom E-Certification Portal
-
 A **customizable E-Certification Portal** designed for colleges, universities, organizations, and event management teams to simplify and automate their certificate management process.
-
 From user registration and admin verification to automated PDF certificate generation and QR code-based validation, this platform offers a flexible solution that can be tailored to your organization's specific requirements.
 
 ## ✨ Key Features
